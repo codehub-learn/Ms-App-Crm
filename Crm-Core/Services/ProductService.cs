@@ -13,19 +13,7 @@ namespace ModelCrm.Services
     public class ProductService : IProductService
     {
         private readonly CrmAppDbContext dbContext = new CrmAppDbContext();
-        public Product CreateProduct(ProductOptions productOptions)
-        {
-            Product product = new Product {  Code= productOptions.Code, 
-                Description=productOptions.Description,
-             Name=productOptions.Name,
-             Price= productOptions.Price,
-             Quantity=productOptions.Quantity};
-
-            dbContext.Products.Add(product);
-            dbContext.SaveChanges();
-
-            return product;
-        }
+         
 
         public bool DeleteProduct(int id)
         {
@@ -35,11 +23,7 @@ namespace ModelCrm.Services
             return true;
         }
 
-        public List<Product> GetAllProduct()
-        {
-            return dbContext.Products.ToList();
-        }
-
+       
         public Product GetProductById(int id)
         {
             return dbContext.Products.Find(id);
@@ -57,6 +41,50 @@ namespace ModelCrm.Services
             dbContext.SaveChanges();
 
             return product;
+        }
+
+        ProductOptions IProductService.CreateProduct(ProductOptions productOptions)
+        {
+            Product product = new Product
+            {
+                Code = productOptions.Code,
+                Description = productOptions.Description,
+                Name = productOptions.Name,
+                Price = productOptions.Price,
+                Quantity = productOptions.Quantity
+            };
+
+            dbContext.Products.Add(product);
+            dbContext.SaveChanges();
+            productOptions.Id = product.Id;
+            return productOptions;
+        }
+
+        List<ProductOptions> IProductService.GetAllProduct()
+        {
+            List<Product> products= dbContext.Products.ToList();
+            List<ProductOptions> productOpts = new List<ProductOptions>();
+            products.ForEach(product => productOpts.Add(new ProductOptions {
+                Code = product.Code,
+                Description = product.Description,
+                Name = product.Name,
+                Price = product.Price,
+                Quantity = product.Quantity,
+                Id = product.Id
+
+
+            }));
+            return productOpts;
+        }
+
+        ProductOptions IProductService.GetProductById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        ProductOptions IProductService.UpdateProduct(ProductOptions productOption, int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

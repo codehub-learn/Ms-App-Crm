@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Crm_Core.Options;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft_Azure_Academy.Models;
@@ -15,11 +16,16 @@ namespace Microsoft_Azure_Academy.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private ICustomerService customerService = new CustomerService();
+        private readonly ICustomerService customerService ;
+        private readonly IProductService productService  ;
 
-        public HomeController(ILogger<HomeController> logger)
+
+        public HomeController(ILogger<HomeController> logger,ICustomerService _customerService ,
+           IProductService _productService  )
         {
             _logger = logger;
+            customerService = _customerService;
+            productService = _productService;
         }
 
         public IActionResult Index()
@@ -31,6 +37,22 @@ namespace Microsoft_Azure_Academy.Controllers
         {
             return View();
         }
+        // 
+
+        public IActionResult Products()
+        {
+            List<ProductOptions> productsOpts = productService.GetAllProduct();
+            ProductModel productModel = new ProductModel
+            {
+                 products = productsOpts
+            };
+
+            return View(productModel);
+        }
+
+
+
+
 
         public IActionResult AddCustomer()
         {
@@ -45,9 +67,37 @@ namespace Microsoft_Azure_Academy.Controllers
         public IActionResult UpdateCustomerWithDetails([FromRoute] int id)
         {
             CustomerOptions customerOptions = customerService.GetCustomerById(id);
-            return View(new CustomerOptionModel { customer = customerOptions });
+            CustomerOptionModel model = new CustomerOptionModel { customer = customerOptions };
+
+            return View(model);
         }
-         
+
+        public IActionResult DeleteCustomerFromView([FromRoute] int id)
+        {
+            customerService.DeleteCustomer(id);
+
+            return Redirect("/Home/Customers");
+        }
+
+        public IActionResult SearchCustomer( )
+        {
+              return View();
+        }
+
+     
+       
+        public IActionResult SearchCustomersDisplay([FromQuery] string text)
+        {
+            List<CustomerOptions> customers = customerService.GetAllCustomers(text );
+            CustomerModel customersModel = new CustomerModel
+            {
+                Customers = customers
+            };
+ 
+            return View("Customers", customersModel);
+
+        }
+
 
         public IActionResult DeleteCustomer()
         {

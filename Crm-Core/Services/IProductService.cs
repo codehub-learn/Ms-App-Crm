@@ -9,10 +9,10 @@ namespace ModelCrm.Services
 {
     public interface IProductService
     {
-        Product CreateProduct(ProductOptions productOptions);
-        Product GetProductById(int id);
-        List<Product> GetAllProduct();
-        Product UpdateProduct(ProductOptions productOption, int id);
+        ProductOptions CreateProduct(ProductOptions productOptions);
+        ProductOptions GetProductById(int id);
+        List<ProductOptions> GetAllProduct();
+        ProductOptions UpdateProduct(ProductOptions productOption, int id);
         bool DeleteProduct(int id);
     }
 }

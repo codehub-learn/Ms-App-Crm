@@ -14,32 +14,32 @@ namespace CrmWebApi.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private IProductService productService = new ProductService();
+        private readonly IProductService productService = new ProductService();
 
         [HttpPost]
-        public Product createProduct(ProductOptions ProductOption)
+        public ProductOptions CreateProduct(ProductOptions ProductOption)
         {
             return productService.CreateProduct(ProductOption);
         }
 
         [HttpGet("{id}")]
-        public Product getProduct(int id)
+        public ProductOptions GetProduct(int id)
         {
             return productService.GetProductById(id);
         }
         [HttpGet]
-        public List<Product> getProducts()
+        public List<ProductOptions> GetProducts()
         {
             return productService.GetAllProduct();
         }
 
         [HttpPut("{id}")]
-        public  Product  updateProducts(ProductOptions ProductOption, int id)
+        public ProductOptions UpdateProducts(ProductOptions ProductOption, int id)
         {
             return productService.UpdateProduct(ProductOption, id);
         }
         [HttpDelete("{id}")]
-        public bool deleteProducts( int id)
+        public bool DeleteProducts( int id)
         {
             return productService.DeleteProduct(id);
         }

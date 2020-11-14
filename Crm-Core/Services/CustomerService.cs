@@ -117,5 +117,30 @@ namespace ModelCrm.Services
                 Id = customer.Id + ""
             };
         }
+
+        public List<CustomerOptions> GetAllCustomers(string searchCriteria)
+        {
+            using CrmAppDbContext dbContext = new CrmAppDbContext();
+            List<Customer> customers = dbContext.Customers
+                .Where( customer => customer.FirstName.Contains(searchCriteria)
+                || customer.LastName.Contains(searchCriteria)
+                )
+                .ToList();
+
+            List<CustomerOptions> customersOpt = new List<CustomerOptions>();
+            customers.ForEach(customer => customersOpt.Add(new CustomerOptions
+            {
+                FirstName = customer.FirstName,
+                LastName = customer.LastName,
+                Phone = customer.Phone,
+                Email = customer.Email,
+                VatNumber = customer.VatNumber,
+                Address = customer.Address,
+                Dob = customer.Dob,
+                Id = customer.Id + ""
+            }));
+
+            return customersOpt;
+        }
     }
 }

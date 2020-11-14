@@ -115,8 +115,16 @@ function deleteCustomer() {
 function findToUpdateCustomer() {
 
     id = $("#Id").val()
-    actionUrl = "/home/UpdateCustomerWithDetails/" + id
+    actionUrl = "/Home/UpdateCustomerWithDetails/" + id
 
     window.open(actionUrl, "_self");
 
+}
+
+
+function searchCustomer() {
+    searchText = $("#searchText").val()
+    actionUrl = "/Home/SearchCustomersDisplay?text=" + searchText
+
+    window.open(actionUrl, "_self");
 }

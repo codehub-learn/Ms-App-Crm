@@ -13,7 +13,7 @@ namespace ModelCrm.Services
         List<CustomerOptions> GetAllCustomers();
         CustomerOptions UpdateCustomer(CustomerOptions customerOpt, int id);
         bool DeleteCustomer(int id);
-
+        List<CustomerOptions> GetAllCustomers(string searchCriteria);
     }
 
 
