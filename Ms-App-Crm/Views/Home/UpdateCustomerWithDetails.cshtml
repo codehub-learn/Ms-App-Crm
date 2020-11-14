@@ -1,16 +1,28 @@
-﻿@*
+﻿@model Microsoft_Azure_Academy.Models.CustomerOptionModel
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 }
 
+
+<h1> Update Customer code = @Model.customer.Id </h1>
+
 <form>
     <table align="center">
         <tr align="center">
             <td>
+                Id
+            </td>
+            <td> <input type="text" id="Id" value="@Model.customer.Id" readonly/></td>
+        </tr>
+
+
+        <tr align="center">
+            <td>
                 FirstName
             </td>
-            <td> <input type="text" id="FirstName" placeholder="FirstName"/></td>
+            <td> <input type="text" id="FirstName" value="@Model.customer.FirstName" /></td>
         </tr>
 
         <tr align="center">
@@ -18,7 +30,7 @@
                 LastName
             </td>
             <td>
-                <input type="text" id="LastName" placeholder="LastName"/>
+                <input type="text" id="LastName" value="@Model.customer.LastName" />
             </td>
         </tr>
 
@@ -27,7 +39,7 @@
                 Address
             </td>
             <td>
-                <input type="text" id="Address" placeholder="Address"/>
+                <input type="text" id="Address" value="@Model.customer.Address" />
             </td>
         </tr>
         <tr align="center">
@@ -35,7 +47,7 @@
                 Email
             </td>
             <td>
-                <input type="text" id="Email" placeholder="Email"/>
+                <input type="text" id="Email" value="@Model.customer.Email" />
 
             </td>
         </tr>
@@ -45,14 +57,14 @@
                 VatNumber
             </td>
             <td>
-                <input type="text" id="VatNumber" placeholder="VatNumber"/>
+                <input type="text" id="VatNumber" value="@Model.customer.VatNumber" />
             </td>
         </tr>
         <tr align="center">
             <td>
-                <input type="button" value="Submit data" onclick="addCustomer()"/>
+                <input type="button" value="Submit data" onclick="updateCustomer()" />
             </td>
         </tr>
+
     </table>
 </form>
- 

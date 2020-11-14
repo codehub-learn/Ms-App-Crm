@@ -9,4 +9,10 @@ namespace Microsoft_Azure_Academy.Models
     {
         public List<CustomerOptions> Customers { get; set; }
     }
+
+
+    public class CustomerOptionModel
+    {
+        public CustomerOptions customer { get; set; }
+    }
 }

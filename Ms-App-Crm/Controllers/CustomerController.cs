@@ -14,33 +14,27 @@ namespace Microsoft_Azure_Academy.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
+        private ICustomerService customerService = new CustomerService();
+
         [HttpPost]
         public CustomerOptions AddCustomer(CustomerOptions customerOpt)
         {
-            ICustomerService customerService = new CustomerService();
-            CustomerOptions customerOptions = customerService.CreateCustomer(  customerOpt);
-           
-
+             CustomerOptions customerOptions = customerService.CreateCustomer(customerOpt);
             return customerOptions;
         }
 
-       
-        
-        [HttpPut("{id}")]
-public  CustomerOptions UpdateCustomer(int id, CustomerOptions customerOpt)
-        {
 
-            ICustomerService customerService = new CustomerService();
+
+        [HttpPut("{id}")]
+        public CustomerOptions UpdateCustomer(int id, CustomerOptions customerOpt)
+        {
             return customerService.UpdateCustomer(customerOpt, id);
-         
+
         }
         [HttpDelete("{id}")]
-        public bool DeleteCustomer(int id )
+        public bool DeleteCustomer(int id)
         {
-
-            ICustomerService customerService = new CustomerService();
             return customerService.DeleteCustomer(id);
-          
         }
     }
 }

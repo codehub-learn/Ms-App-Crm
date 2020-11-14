@@ -66,6 +66,8 @@ function updateCustomer() {
         success: function (data, textStatus, jQxhr) {
 
             alert(JSON.stringify(data))
+
+            window.open("/","_self")
         },
         error: function (jqXhr, textStatus, errorThrown) {
             alert(errorThrown);
@@ -105,5 +107,16 @@ function deleteCustomer() {
     });
 
 
+
+}
+
+
+
+function findToUpdateCustomer() {
+
+    id = $("#Id").val()
+    actionUrl = "/home/UpdateCustomerWithDetails/" + id
+
+    window.open(actionUrl, "_self");
 
 }

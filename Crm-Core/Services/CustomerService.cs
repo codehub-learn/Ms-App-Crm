@@ -14,6 +14,8 @@ namespace ModelCrm.Services
 
         public CustomerOptions CreateCustomer(CustomerOptions customerOptions)
         {
+            //validation
+
             Customer customer = new Customer  { 
                 FirstName = customerOptions.FirstName,
                 LastName = customerOptions.LastName,
@@ -63,10 +65,9 @@ namespace ModelCrm.Services
 
         public CustomerOptions UpdateCustomer(CustomerOptions customerOpt, int id)
         {
-   
+
             Customer customer = dbContext.Customers.Find(id);
-            customer.Address = customerOpt.Address;
-            customer.Email =customerOpt.Email;
+            customerOptToCustomer(customerOpt, customer);
             dbContext.SaveChanges();
 
             return new CustomerOptions
@@ -79,6 +80,16 @@ namespace ModelCrm.Services
                 Address = customer.Address,
                 Dob = customer.Dob,
             };
+        }
+
+        private static void customerOptToCustomer(CustomerOptions customerOpt, Customer customer)
+        {
+            customer.FirstName = customerOpt.FirstName;
+            customer.LastName = customerOpt.LastName;
+            customer.Dob = customerOpt.Dob;
+            customer.VatNumber = customerOpt.VatNumber;
+            customer.Address = customerOpt.Address;
+            customer.Email = customerOpt.Email;
         }
 
         public bool DeleteCustomer(int id)
@@ -103,6 +114,7 @@ namespace ModelCrm.Services
                 VatNumber = customer.VatNumber,
                 Address = customer.Address,
                 Dob = customer.Dob,
+                Id = customer.Id + ""
             };
         }
     }

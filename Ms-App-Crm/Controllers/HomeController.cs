@@ -15,7 +15,7 @@ namespace Microsoft_Azure_Academy.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-     
+        private ICustomerService customerService = new CustomerService();
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -42,6 +42,13 @@ namespace Microsoft_Azure_Academy.Controllers
             return View();
         }
 
+        public IActionResult UpdateCustomerWithDetails([FromRoute] int id)
+        {
+            CustomerOptions customerOptions = customerService.GetCustomerById(id);
+            return View(new CustomerOptionModel { customer = customerOptions });
+        }
+         
+
         public IActionResult DeleteCustomer()
         {
             return View();
@@ -49,7 +56,7 @@ namespace Microsoft_Azure_Academy.Controllers
 
         public IActionResult Customers()
         {
-            ICustomerService customerService = new CustomerService();
+            
             List<CustomerOptions> customers = customerService.GetAllCustomers();
             CustomerModel customersModel = new CustomerModel { 
                 Customers= customers 
