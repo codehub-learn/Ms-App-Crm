@@ -29,6 +29,7 @@ function addCustomer() {
         success: function (data, textStatus, jQxhr) {
 
             alert(JSON.stringify(data))
+            window.open("/home/customers", "_self")
         },
         error: function (jqXhr, textStatus, errorThrown) {
             alert(errorThrown);
@@ -67,7 +68,7 @@ function updateCustomer() {
 
             alert(JSON.stringify(data))
 
-            window.open("/","_self")
+            window.open("/home/customers","_self")
         },
         error: function (jqXhr, textStatus, errorThrown) {
             alert(errorThrown);
@@ -86,9 +87,7 @@ function deleteCustomer() {
     actiontype = "DELETE"
     actionDataType = "json"
 
-   
-
-    $.ajax({
+     $.ajax({
         url: actionUrl,
         dataType: actionDataType,
         type: actiontype,
@@ -105,9 +104,6 @@ function deleteCustomer() {
         }
 
     });
-
-
-
 }
 
 

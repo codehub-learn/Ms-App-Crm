@@ -14,4 +14,8 @@
     <ProjectReference Include="..\Crm-Core\Crm-Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Order\" />
+  </ItemGroup>
+
 </Project>

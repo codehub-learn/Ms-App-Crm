@@ -12,8 +12,11 @@ namespace ModelCrm.Services
 {
     public class ProductService : IProductService
     {
-        private readonly CrmAppDbContext dbContext = new CrmAppDbContext();
-         
+        private readonly CrmAppDbContext dbContext ;
+        public ProductService(CrmAppDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
 
         public bool DeleteProduct(int id)
         {
@@ -23,36 +26,10 @@ namespace ModelCrm.Services
             return true;
         }
 
-       
-        public Product GetProductById(int id)
-        {
-            return dbContext.Products.Find(id);
-        }
-
-        public Product UpdateProduct(ProductOptions productOption, int id)
-        {
-            Product product = dbContext.Products.Find(id);
-            product.Code = productOption.Code;
-            product.Description = productOption.Description;
-            product.Name = productOption.Name;
-            product.Price = productOption.Price;
-            product.Quantity = productOption.Quantity;
-
-            dbContext.SaveChanges();
-
-            return product;
-        }
-
+     
         ProductOptions IProductService.CreateProduct(ProductOptions productOptions)
         {
-            Product product = new Product
-            {
-                Code = productOptions.Code,
-                Description = productOptions.Description,
-                Name = productOptions.Name,
-                Price = productOptions.Price,
-                Quantity = productOptions.Quantity
-            };
+            Product product = GetProductFromProductOptions(productOptions);
 
             dbContext.Products.Add(product);
             dbContext.SaveChanges();
@@ -64,27 +41,58 @@ namespace ModelCrm.Services
         {
             List<Product> products= dbContext.Products.ToList();
             List<ProductOptions> productOpts = new List<ProductOptions>();
-            products.ForEach(product => productOpts.Add(new ProductOptions {
+            products.ForEach(product => productOpts.Add(
+                    GetProductOptionsFromProduct(product)
+            ));
+            return productOpts;
+        }
+
+        ProductOptions IProductService.GetProductById(int id)
+        {
+            Product product = dbContext.Products.Find(id);
+            if (product == null) return null;
+            return    GetProductOptionsFromProduct(product) ;
+        }
+
+          ProductOptions IProductService.UpdateProduct(ProductOptions productOption, int id)
+        {
+           
+            Product product = dbContext.Products.Find(id);
+            product.Code = productOption.Code;
+            product.Description = productOption.Description;
+            product.Name = productOption.Name;
+            product.Price = productOption.Price;
+            product.Quantity = productOption.Quantity;
+
+            dbContext.SaveChanges();
+
+            return productOption;
+        }
+
+
+        private static ProductOptions GetProductOptionsFromProduct(Product product)
+        {
+            return new ProductOptions
+            {
                 Code = product.Code,
                 Description = product.Description,
                 Name = product.Name,
                 Price = product.Price,
                 Quantity = product.Quantity,
                 Id = product.Id
-
-
-            }));
-            return productOpts;
+            };
         }
 
-        ProductOptions IProductService.GetProductById(int id)
+        private static Product GetProductFromProductOptions(ProductOptions productOptions)
         {
-            throw new NotImplementedException();
-        }
-
-        ProductOptions IProductService.UpdateProduct(ProductOptions productOption, int id)
-        {
-            throw new NotImplementedException();
+            return new Product
+            {
+                Code = productOptions.Code,
+                Description = productOptions.Description,
+                Name = productOptions.Name,
+                Price = productOptions.Price,
+                Quantity = productOptions.Quantity,
+            };
         }
     }
 }

@@ -50,10 +50,6 @@ namespace Microsoft_Azure_Academy.Controllers
             return View(productModel);
         }
 
-
-
-
-
         public IActionResult AddCustomer()
         {
             return View();

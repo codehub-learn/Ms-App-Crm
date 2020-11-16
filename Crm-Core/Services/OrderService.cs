@@ -11,7 +11,12 @@ namespace ModelCrm.Services
 {
     public class OrderService : IOrderService
     {
-        private readonly CrmAppDbContext dbContext = new CrmAppDbContext();
+        private readonly CrmAppDbContext dbContext;
+        public OrderService(CrmAppDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
+
 
         public OrderOption CreateOrder(CustomerOptions customerOpt)
         {

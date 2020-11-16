@@ -14,8 +14,11 @@ namespace Microsoft_Azure_Academy.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        private ICustomerService customerService = new CustomerService();
-
+        private ICustomerService customerService  ;
+         public CustomerController(ICustomerService customerService)
+        {
+            this.customerService = customerService;
+        }
         [HttpPost]
         public CustomerOptions AddCustomer(CustomerOptions customerOpt)
         {

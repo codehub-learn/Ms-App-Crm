@@ -10,7 +10,13 @@ namespace ModelCrm.Services
 {
     public class CustomerService : ICustomerService
     {
-        private readonly CrmAppDbContext dbContext = new CrmAppDbContext();
+        private readonly CrmAppDbContext dbContext;
+
+        public CustomerService(CrmAppDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
+
 
         public CustomerOptions CreateCustomer(CustomerOptions customerOptions)
         {

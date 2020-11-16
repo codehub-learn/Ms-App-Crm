@@ -26,7 +26,7 @@ namespace ModelCrm.CrmDbContext
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderProduct> OrderProducts { get; set; }
 
-        private readonly string connectionString =
+        public readonly static string connectionString =
             "Server =localhost; " +
             "Database =crm; " +
             "User Id =sa; " +
