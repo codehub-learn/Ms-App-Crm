@@ -30,6 +30,7 @@ namespace Microsoft_Azure_Academy.Controllers
 
         public IActionResult Index()
         {
+            _logger.LogInformation("Hello World!");
             return View();
         }
 

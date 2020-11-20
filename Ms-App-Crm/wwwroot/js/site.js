@@ -5,40 +5,43 @@
 
 
 function addCustomer() {
-    actionUrl = "/api/customer"
-    actiontype ="POST"
-    actionDataType   ="json"
 
-    sendData = {
-        "firstName":$("#FirstName").val(),
-        "lastName": $("#LastName").val(),
-        "address": $("#Address").val(),
-        "email": $("#Email").val(),
-        "vatNumber": $("#VatNumber").val()
+    var actionUrl = "/api/customer";
+    var input = document.getElementById('Picture');
+    var files = input.files;
+    var formData = new FormData();
+
+    for (var i = 0; i != files.length; i++) {
+        formData.append("Picture", files[i]);
     }
 
-
-    $.ajax({
-        url:actionUrl,
-        dataType:actionDataType,
-        type: actiontype,
-        data: JSON.stringify(sendData),
-        contentType: 'application/json',
-        processData: false,
-
-        success: function (data, textStatus, jQxhr) {
-
-            alert(JSON.stringify(data))
-            window.open("/home/customers", "_self")
-        },
-        error: function (jqXhr, textStatus, errorThrown) {
-            alert(errorThrown);
+    formData.append("firstName", $('#FirstName').val());
+    formData.append("lastName", $('#LastName').val());
+    formData.append("address", $('#Address').val());
+    formData.append("email", $('#Email').val());
+    formData.append("vatNumber", $('#VatNumber').val());
+ 
+    $.ajax(
+        {
+            url: actionUrl,
+            data: formData,
+            processData: false,
+            contentType: false,
+            type: "POST",
+            success: function (data) {
+                window.open("/home/customers", "_self")
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                alert("Error from server: " + errorThrown);
+            }
         }
-
-    });
-
+    );
 }
 
+
+
+
+ 
 
 function updateCustomer() {
     id = $("#Id").val()
@@ -123,4 +126,37 @@ function searchCustomer() {
     actionUrl = "/Home/SearchCustomersDisplay?text=" + searchText
 
     window.open(actionUrl, "_self");
+}
+
+
+function buyProduct(ordedId,productId) {
+
+    actionUrl = "/api/Order/" + ordedId + "/product/" + productId
+    actiontype = "POST"
+    actionDataType = "json"
+
+
+    $.ajax({
+        url: actionUrl,
+        dataType: actionDataType,
+        type: actiontype,
+
+        contentType: 'application/json',
+        processData: false,
+
+        success: function (data, textStatus, jQxhr) {
+
+         //   alert(JSON.stringify(data))
+
+          
+
+            $('#myCart').append('<tr><td>' + JSON.stringify(data)+'</td>/tr>');
+        },
+        error: function (jqXhr, textStatus, errorThrown) {
+            alert(errorThrown);
+        }
+
+    });
+
+
 }

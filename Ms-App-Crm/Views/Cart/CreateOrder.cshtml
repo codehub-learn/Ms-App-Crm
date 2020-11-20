@@ -1,0 +1,36 @@
+﻿@model OrderModel
+@{
+    ViewData["Title"] = "CreateOrder";
+    Layout = "~/Views/Shared/_OrdrerLayout.cshtml";
+}
+
+<h1>CreateOrder</h1>
+
+
+
+<h2> Available products</h2>
+<table border="1" cellpadding="10" cellspacing="0">
+    <tr>
+        <th> product Name  </th>
+        <th>  product Description </th>
+        <th>  product Price   </th>
+    </tr>
+
+    @{
+        foreach (var product in Model.products)
+        {
+            <tr>
+                <td><a href="#" onclick="buyProduct(@Model.orderId, @product.Id)">@product.Name</a> </td>
+                <td> @product.Description </td>
+                <td> @product.Price   </td>
+            </tr>
+        }
+    }
+
+</table>
+
+
+<h2> My cart</h2>
+<table id="myCart">
+
+</table>

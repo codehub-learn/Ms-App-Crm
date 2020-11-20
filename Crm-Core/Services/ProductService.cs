@@ -39,7 +39,16 @@ namespace ModelCrm.Services
 
         List<ProductOptions> IProductService.GetAllProduct()
         {
-            List<Product> products= dbContext.Products.ToList();
+            List<Product> products= dbContext.Products
+                .Where(product => product.Quantity>5)
+            //     .Skip(6)
+           //     .Take(10)
+                .OrderByDescending (product => product.Price)
+                .ThenBy(product => product.Name)
+                
+                
+                .ToList();
+
             List<ProductOptions> productOpts = new List<ProductOptions>();
             products.ForEach(product => productOpts.Add(
                     GetProductOptionsFromProduct(product)

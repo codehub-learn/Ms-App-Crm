@@ -15,7 +15,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Order\" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\uploadedimages\" />
   </ItemGroup>
 
 </Project>

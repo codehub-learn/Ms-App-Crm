@@ -1,0 +1,32 @@
+﻿@model AllOrdersModel
+@{
+    ViewData["Title"] = "ViewOrders";
+    Layout = "~/Views/Shared/_OrdrerLayout.cshtml";
+}
+
+<h1>ViewOrders</h1>
+
+<table id="ordersTable" border="1" cellpadding="10" cellspacing="0">
+    <tr>
+        <th> Order Id</th>
+        <th> Customer Name</th>
+        <th> Customer Id</th>
+        <th> Date</th>
+
+    </tr>
+
+    @{
+        foreach (var order in Model.orders)
+        {
+        <tr>
+            <td> @order.OrderId</td>
+            <td> @order.CustomerName</td>
+            <td> @order.CustomerId</td>
+            <td> @order.Date</td>
+        </tr>
+
+        }
+    }
+
+
+</table>

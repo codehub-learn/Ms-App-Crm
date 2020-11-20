@@ -34,6 +34,25 @@ namespace ModelCrm.Services
             return orderOption;
         }
 
+        public OrderOption CreateOrder(int customerId)
+        {
+       
+            Customer customer = dbContext.Customers.Find(customerId);
+            if (customer == null) return null;
+            Order order = new Order { Customer = customer };
+            dbContext.Orders.Add(order);
+            dbContext.SaveChanges();
+            OrderOption orderOption = new OrderOption
+            {
+                CustomerName = customer.FirstName + " " + customer.LastName,
+                OrderId = order.Id
+            };
+            return orderOption;
+        }
+
+
+
+
         public OrderOption GetOrder(int orderId)
         {
             Order order = dbContext.Orders.Include(o => o.Customer).FirstOrDefault(x => x.Id == orderId);

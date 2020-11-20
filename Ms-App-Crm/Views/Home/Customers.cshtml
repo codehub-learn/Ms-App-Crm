@@ -18,6 +18,7 @@ To add a new customer press <a href="~/home/addcustomer">here</a>
         <th> Full Name</th>
         <th> Address</th>
         <th>Email</th>
+        <th>photo</th>
         <th>Update</th>
         <th>Delete</th>
     </tr>
@@ -30,6 +31,7 @@ To add a new customer press <a href="~/home/addcustomer">here</a>
             <td> @customer.FirstName  @customer.LastName</td>
             <td> @customer.Address </td>
             <td> @customer.Email   </td>
+            <td> <img src="~/uploadedimages/@customer.Phone" height="25" /></td>
             <td> <a href="~/home/updatecustomerwithdetails/@customer.Id"><img src="~/images/update.png" width="25" /></a></td>
             <td> <a href="~/home/DeleteCustomerFromView/@customer.Id"><img src="~/images/delete.png" width="25" /></a></td>
         </tr>

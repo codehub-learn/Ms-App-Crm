@@ -4,13 +4,13 @@
 @{
 }
 
-<form>
+<form id="createCustomerForm">
     <table align="center">
         <tr align="center">
             <td>
                 FirstName
             </td>
-            <td> <input type="text" id="FirstName" placeholder="FirstName"/></td>
+            <td> <input type="text" id="FirstName" placeholder="FirstName" /></td>
         </tr>
 
         <tr align="center">
@@ -18,7 +18,7 @@
                 LastName
             </td>
             <td>
-                <input type="text" id="LastName" placeholder="LastName"/>
+                <input type="text" id="LastName" placeholder="LastName" />
             </td>
         </tr>
 
@@ -27,7 +27,7 @@
                 Address
             </td>
             <td>
-                <input type="text" id="Address" placeholder="Address"/>
+                <input type="text" id="Address" placeholder="Address" />
             </td>
         </tr>
         <tr align="center">
@@ -35,7 +35,7 @@
                 Email
             </td>
             <td>
-                <input type="text" id="Email" placeholder="Email"/>
+                <input type="text" id="Email" placeholder="Email" />
 
             </td>
         </tr>
@@ -45,14 +45,34 @@
                 VatNumber
             </td>
             <td>
-                <input type="text" id="VatNumber" placeholder="VatNumber"/>
+                <input type="text" id="VatNumber" placeholder="VatNumber" />
             </td>
         </tr>
+
+
         <tr align="center">
             <td>
-                <input type="button" value="Submit data" onclick="addCustomer()"/>
+
+                Upload photo
+            </td>
+            <td>
+                <input type="file" id="Picture" name="Picture" />
+            </td>
+        </tr>
+
+
+
+        <tr align="center">
+            <td>
+                <input type="button" value="Submit data" onclick="addCustomer()" />
             </td>
         </tr>
     </table>
+    <div id="result" name="result"></div>
 </form>
+
+
+
+
+
  
